@@ -41,19 +41,17 @@
 
             $totalTime = date_diff($startTime, $endTime);
             $totalHours = $totalTime->h;
-            $totalMinutes = $totalTime -> i;
-            $totalSeconds = $totalTime -> s;
+
+            $totalMinutes = $totalHours * 60;
+            $totalMinutes += $totalTime -> i;
+
+            $totalSeconds = $totalMinutes * 60;
+            $totalSeconds += $totalTime -> s;
 
             $timeInFormat = date_format($startTime, 'H:i A');
             $timeOutFormat = date_format($endTime, 'h:i A');
 
-            if (!empty($timeIn) && !empty($timeOut)) {
-                echo "SET $timeInFormat, $timeOutFormat, $totalHours, $totalMinutes";
-            } else {
-                echo "not set";
-            }
-        } else {
-            echo "not yet set";
+            echo "SET $timeInFormat, $timeOutFormat, $totalHours hours, $totalMinutes minutes, $totalSeconds seconds";
         }
         ?>
 
